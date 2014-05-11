@@ -1,9 +1,8 @@
-package it.paperdragon.sbt.plugins.libnotify
+package it.paperdragon.sbt
 
 import sbt.{TestEvent, TestResult, TestsListener}
 import sbt.testing.Status
-import it.paperdragon.libnotify.LibNotify
-import it.paperdragon.sbt.plugins.libnotify.LibNotifyTestsListener.FormatFunction
+import it.paperdragon.sbt.LibNotifyTestsListener.FormatFunction
 
 /**
  *

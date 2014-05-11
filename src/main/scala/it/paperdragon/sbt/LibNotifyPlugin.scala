@@ -1,25 +1,27 @@
-package it.paperdragon.sbt.plugins.libnotify
+package it.paperdragon.sbt
 
 import sbt._
 import Keys._
-import it.paperdragon.libnotify.LibNotify
 import sbt.testing.Status
-import it.paperdragon.sbt.plugins.libnotify.LibNotifyTestsListener.FormatFunction
+import it.paperdragon.sbt.LibNotifyTestsListener.FormatFunction
 
 /**
  * @author lpiepiora
  */
 object LibNotifyPlugin extends Plugin {
 
-  val libNotifyPassedIcon = SettingKey[String]("Icon shown when the tests pass")
+  /**
+   * Setting key defining icon being used
+   */
+  val libNotifyPassedIcon = settingKey[String]("Icon shown when the tests pass")
 
-  val libNotifyFailedIcon = SettingKey[String]("Icon shown when the tests fail")
+  val libNotifyFailedIcon = settingKey[String]("Icon shown when the tests fail")
 
-  val libNotifyErrorIcon = SettingKey[String]("Icon shown when the tests are in error")
+  val libNotifyErrorIcon = settingKey[String]("Icon shown when the tests are in error")
 
-  val libNotifySummaryFormat = SettingKey[FormatFunction]("The function converting status to the notification's message summary")
+  val libNotifySummaryFormat = settingKey[FormatFunction]("The function converting status to the notification's message summary")
 
-  val libNotifyBodyFormat = SettingKey[FormatFunction]("The function converting status to the notification's message body")
+  val libNotifyBodyFormat = settingKey[FormatFunction]("The function converting status to the notification's message body")
 
   private val shutdownLibNotifyHook = new ExitHook {
     override def runBeforeExiting(): Unit = LibNotify.shutdown()

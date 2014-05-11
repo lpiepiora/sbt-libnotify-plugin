@@ -8,7 +8,7 @@ name := "sbt-libnotify-plugin"
 
 organization := "it.paperdragon"
 
-version := "0.1.0"
+version := "0.5.0"
 
 licenses +=("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
 
@@ -21,6 +21,4 @@ bintrayOrganization in bintray := None
 lazy val sbtLibNotifyPlugin = Project(
   id = "sbt-libnotify-plugin",
   base = file(".")
-) dependsOn libnotify
-
-lazy val libnotify = project in file("libnotify")
+)

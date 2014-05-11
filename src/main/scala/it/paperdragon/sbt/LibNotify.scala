@@ -1,4 +1,4 @@
-package it.paperdragon.libnotify
+package it.paperdragon.sbt
 
 /**
  * Interface for libnotify

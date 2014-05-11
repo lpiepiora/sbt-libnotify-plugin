@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include "it_paperdragon_libnotify_LibNotify__.h"
+#include "it_paperdragon_sbt_LibNotify__.h"
 
 // We need to call notifications from JNI code
 #include <glib.h>
 #include <unistd.h>
 #include <libnotify/notify.h>
 
-// globally held notificatoin pointer to update the existing notificaiton
-// this is required because ubuntu doesn't allow to hide notifications
+// globally held notification pointer to update the existing notificaiton
+// this is required because Ubuntu doesn't allow to hide notifications
 NotifyNotification* notification  = NULL;
 
 /*
- * Class:     it_paperdragon_libnotify_LibNotify__
+ * Class:     it_paperdragon_sbt_LibNotify__
  * Method:    notifyInitializeInternal
  * Signature: (Ljava/lang/String;)Z
  */
-JNIEXPORT jboolean JNICALL Java_it_paperdragon_libnotify_LibNotify_00024_notifyInitializeInternal
+JNIEXPORT jboolean JNICALL Java_it_paperdragon_sbt_LibNotify_00024_notifyInitializeInternal
   (JNIEnv* env, jobject this, jstring app_name) {
   
   const char* native_app_name = (*env)->GetStringUTFChars(env, app_name, NULL);
@@ -27,11 +27,11 @@ JNIEXPORT jboolean JNICALL Java_it_paperdragon_libnotify_LibNotify_00024_notifyI
 }
 
 /*
- * Class:     it_paperdragon_libnotify_LibNotify__
+ * Class:     it_paperdragon_sbt_LibNotify__
  * Method:    showNotificationInternal
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_it_paperdragon_libnotify_LibNotify_00024_showNotificationInternal
+JNIEXPORT jstring JNICALL Java_it_paperdragon_sbt_LibNotify_00024_showNotificationInternal
   (JNIEnv* env, jobject this, jstring summary, jstring body, jstring icon) {
 
   GError*             error         = NULL;
@@ -63,11 +63,11 @@ JNIEXPORT jstring JNICALL Java_it_paperdragon_libnotify_LibNotify_00024_showNoti
 }
 
 /*
- * Class:     it_paperdragon_libnotify_LibNotify__
+ * Class:     it_paperdragon_sbt_LibNotify__
  * Method:    notifyDestroyInternal
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_it_paperdragon_libnotify_LibNotify_00024_notifyDestroyInternal
+JNIEXPORT void JNICALL Java_it_paperdragon_sbt_LibNotify_00024_notifyDestroyInternal
   (JNIEnv* env, jobject this) {
     notify_uninit ();
 }
