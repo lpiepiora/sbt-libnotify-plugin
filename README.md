@@ -1,4 +1,4 @@
 sbt-libnotify-plugin
 ====================
 
-SBT plugin for showing notifications about tests, designed to work with Ubuntu
+SBT plugin for showing notifications about tests, designed to work with Ubuntu's version of libnotify.
