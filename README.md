@@ -24,7 +24,9 @@ Installation
 Per Project Basis
 -------------------
 
-In your `PROJECT_DIR/projects/plugins.sbt` use `addSbtPlugin("it.paperdragon" % "sbt-libnotify-plugin" % "0.5.0")`
+In your `PROJECT_DIR/projects/plugins.sbt` add
+
+    addSbtPlugin("it.paperdragon" % "sbt-libnotify-plugin" % "0.5.0")
 
 You can use the plugin with `build.sbt` and `Build.scala` setup.
 
@@ -56,4 +58,4 @@ Create `~/.sbt/0.13/plugins/build.sbt` if it doesn't exist and add
 
 Create `~/.sbt/0.13/local.sbt` if it doesn't exist and add
 
-    `it.paperdragon.sbt.LibNotifyPlugin.sbtLibNotifySettings`
+    it.paperdragon.sbt.LibNotifyPlugin.sbtLibNotifySettings
