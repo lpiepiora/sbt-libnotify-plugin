@@ -1,5 +1,6 @@
 import sbt._
 import sbt.Keys._
+import Path.flat
 
 object LibNotifyBuild extends Build {
 
@@ -27,7 +28,9 @@ object LibNotifyBuild extends Build {
       val extensionLocation = compileNative.value
       analysis
     },
-    products in Compile += (target in Compile).value / "native"
+    products in Compile += (target in Compile).value / "native",
+    (unmanagedSources in(Compile, packageSrc)) ++= (baseDirectory.value / "src" / "main" / "native" ** "*").get,
+    (mappings in (Compile, packageSrc)) ++= (baseDirectory.value / "src" / "main" / "native" ** "*").get pair flat
   )
 
 
