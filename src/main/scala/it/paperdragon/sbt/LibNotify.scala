@@ -20,8 +20,14 @@ object LibNotify {
    */
   type Error = String
 
+  /**
+   * Tracks the library notification status
+   */
   private var isInitialized = false
 
+  /**
+   * The path to the temporary native library
+   */
   private val libNotifyTempPath = {
     val path = java.nio.file.Files.createTempFile(null, null)
     path.toFile.deleteOnExit()

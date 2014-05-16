@@ -65,7 +65,7 @@ class LibNotifyTestsListener(val passedIcon: String,
   }
 
   /**
-   * called for each test method or equivalent
+   * Called for each test method or equivalent
    * @param event the test event
    */
   override def testEvent(event: TestEvent): Unit = {

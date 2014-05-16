@@ -6,33 +6,40 @@ import sbt.testing.Status
 import it.paperdragon.sbt.LibNotifyTestsListener.FormatFunction
 
 /**
+ * The main plugin class.
+ *
  * @author lpiepiora
  */
 object LibNotifyPlugin extends Plugin {
 
   /**
-   * Setting key defining icon being used
+   * The setting to set icon, used when tests pass
    */
   val libNotifyPassedIcon = settingKey[String]("Icon shown when the tests pass")
 
+  /**
+   * The setting to set icon, used when tests fail
+   */
   val libNotifyFailedIcon = settingKey[String]("Icon shown when the tests fail")
 
+  /**
+   * The setting to set icon, used when tests are in error
+   */
   val libNotifyErrorIcon = settingKey[String]("Icon shown when the tests are in error")
 
+  /**
+   * The setting to set a format function used to show the message's summary
+   */
   val libNotifySummaryFormat = settingKey[FormatFunction]("The function converting status to the notification's message summary")
 
+  /**
+   * The setting to set a function converting status to the notification's message body
+   */
   val libNotifyBodyFormat = settingKey[FormatFunction]("The function converting status to the notification's message body")
 
-  private val shutdownLibNotifyHook = new ExitHook {
-    override def runBeforeExiting(): Unit = LibNotify.shutdown()
-  }
-
-  private val initializeLibNotifyHook = (s: State) => {
-    LibNotify.initialize("sbt-libnotify-plugin")
-    s.copy(exitHooks = s.exitHooks + shutdownLibNotifyHook)
-  }
-
-  // by default we import the settings for compile config
+  /**
+   * Default sbt-libNotify-settings
+   */
   lazy val sbtLibNotifySettings = inConfig(Compile)(baseSbtLibNotifySettings) ++ Seq(
     (onLoad in Global) := {
       val previous = (onLoad in Global).value
@@ -56,6 +63,21 @@ object LibNotifyPlugin extends Plugin {
       )
     }
   )
+
+  /**
+   * Shuts down the libnotify
+   */
+  private val shutdownLibNotifyHook = new ExitHook {
+    override def runBeforeExiting(): Unit = LibNotify.shutdown()
+  }
+
+  /**
+   * Initializes the libnotify
+   */
+  private val initializeLibNotifyHook = (s: State) => {
+    LibNotify.initialize("sbt-libnotify-plugin")
+    s.copy(exitHooks = s.exitHooks + shutdownLibNotifyHook)
+  }
 
   /**
    * The default formatting function for the notification summary
