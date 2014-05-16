@@ -33,27 +33,27 @@ object LibNotifyPlugin extends Plugin {
   }
 
   // by default we import the settings for compile config
-  lazy val sbtLibNotifySettings =
-    Seq(
-      libNotifyPassedIcon := "info",
-      libNotifyFailedIcon := "error",
-      libNotifyErrorIcon := "error",
-      libNotifySummaryFormat := defaultSummaryFormat,
-      libNotifyBodyFormat := defaultBodyFormat
-    ) ++ inConfig(Compile)(baseSbtLibNotifySettings)
+  lazy val sbtLibNotifySettings = inConfig(Compile)(baseSbtLibNotifySettings) ++ Seq(
+    (onLoad in Global) := {
+      val previous = (onLoad in Global).value
+      initializeLibNotifyHook compose previous
+    }
+  )
 
-
-  // the base settings to be reused with various configurations
+  /**
+   * the base settings to be reused with various configurations
+   */
   lazy val baseSbtLibNotifySettings: Seq[Setting[_]] = Seq(
+    libNotifyPassedIcon := "info",
+    libNotifyFailedIcon := "error",
+    libNotifyErrorIcon := "error",
+    libNotifySummaryFormat := defaultSummaryFormat,
+    libNotifyBodyFormat := defaultBodyFormat,
     testListeners += {
       LibNotifyTestsListener(
         libNotifyPassedIcon.value, libNotifyFailedIcon.value, libNotifyErrorIcon.value,
         libNotifySummaryFormat.value, libNotifyBodyFormat.value
       )
-    },
-    (onLoad in Global) := {
-      val previous = (onLoad in Global).value
-      initializeLibNotifyHook compose previous
     }
   )
 
