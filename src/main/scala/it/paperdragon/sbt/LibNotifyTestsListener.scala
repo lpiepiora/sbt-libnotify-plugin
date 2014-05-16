@@ -83,6 +83,14 @@ class LibNotifyTestsListener(val passedIcon: String,
 
   override def startGroup(name: String): Unit = {}
 
+  override def toString: String = {
+    val exampleResult = TestResult.Passed
+    val exampleDetails = Status.values.map(_ -> 0).toMap
+    val sf = summaryFormat(exampleResult, exampleDetails)
+    val bf = bodyFormat(exampleResult, exampleDetails)
+    s"LibNotifyTestsListener(passedIcon=$passedIcon, failedIcon=$failedIcon, errorIcon=$errorIcon, summaryFormat=$sf, bodyFormat=$bf)"
+  }
+
   /**
    * Gets icon string for the specific error
    */
