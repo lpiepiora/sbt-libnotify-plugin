@@ -56,11 +56,11 @@ object LibNotifyPlugin extends Plugin {
     libNotifyErrorIcon := "error",
     libNotifySummaryFormat := defaultSummaryFormat,
     libNotifyBodyFormat := defaultBodyFormat,
-    testListeners += {
+    testListeners := {
       LibNotifyTestsListener(
         libNotifyPassedIcon.value, libNotifyFailedIcon.value, libNotifyErrorIcon.value,
         libNotifySummaryFormat.value, libNotifyBodyFormat.value
-      )
+      ) +: testListeners.value.filterNot(_.isInstanceOf[LibNotifyTestsListener])
     }
   )
 
