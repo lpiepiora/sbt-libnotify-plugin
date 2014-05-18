@@ -2,6 +2,8 @@ import bintray.Keys._
 
 bintrayPublishSettings
 
+releaseSettings
+
 sbtPlugin := true
 
 name := "sbt-libnotify-plugin"
